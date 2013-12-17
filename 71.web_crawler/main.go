@@ -12,6 +12,7 @@ type Fetcher interface {
 
 // Crawl uses fetcher to recursively crawl
 // pages starting with url, to a maximum of depth.
+// simplified to the function from thread here to use a buffered channel to limit requests: https://groups.google.com/forum/#!topic/golang-nuts/r-Ye2v5BB0A
 func Crawl(url string, depth int, fetcher Fetcher) {
 	reqch := make(chan int)
 	workch := make(chan bool, 4) // limit the number of concurrent requests with a buffered channe;
